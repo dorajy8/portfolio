@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dora Li | Portfolio</title>
+  <style>
+    /* ---------- Colors from your palette ---------- */
+    :root {
+      --ice-blue: #CCD4DE;
+      --ice-deep: #456D84;
+      --ice-mid: #899CA3;
+      --rosy: #BD9D88;
+      --peach: #EBC1A8;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: "Helvetica Neue", sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    section {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    h1, h2 {
+      margin: 0.5rem 0;
+    }
+
+    a {
+      color: white;
+      background: var(--ice-deep);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    a:hover {
+      background: var(--rosy);
+    }
+
+    /* ---------- Project Slides ---------- */
+    .projects-container {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .project-slide {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      height: 100%;
+      width: 100%;
+      padding: 3rem;
+      background: var(--ice-blue);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transition: all 0.8s ease;
+    }
+
+    .project-slide.active {
+      left: 0;
+      opacity: 1;
+    }
+
+    /* Sidebar Dots */
+    .dots {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--ice-mid);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .dot.active {
+      background: var(--rosy);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- About -->
+  <section style="background: var(--ice-blue);">
+    <h1>About Me</h1>
+    <p>
+      Hi, I’m Dora Li — a Cognitive Science major with a Data Science minor, passionate about neuroscience,
+      machine learning, and building tools that make data useful for people.
+    </p>
+    <h2>Education</h2>
+    <p>BA Cognitive Science + Data Science Minor</p>
+    <h2>Skills</h2>
+    <p>Python, PyTorch, SQL, Java, R, Visualization, Machine Learning</p>
+  </section>
+
+  <!-- Projects -->
+  <div class="projects-container" id="projects">
+    <!-- Project 1 -->
+    <div class="project-slide active">
+      <h1>Provider Lookup</h1>
+      <p>
+        My first full stack project with Django + PostgreSQL. I built backend APIs, handled database connections,
+        and optimized the search function for finding doctors near users.
+      </p>
+      <a href="https://github.com/dorajy8/Provider_lookup" target="_blank">Read More</a>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-slide">
+      <h1>Yaaro</h1>
+      <p>
+        A mobile app for social gatherings. I built a recommendation engine using Supabase Edge Functions,
+        integrated sentiment analysis, and helped design algorithms for user-based group matching.
+      </p>
+      <a href="https://www.yaaro.co/" target="_blank">Read More</a>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-slide">
+      <h1>Recurrent Spiking Neural Network Research</h1>
+      <p>
+        With Prof. Yuqing Zhu, I researched RSNNs trained with evolutionary algorithms for brain-like behavior.
+        Results were presented at the Society of Neuroscience, Chicago 2024.
+      </p>
+      <a href="https://www.world-wide.org/bernstein-24/evolutionary-algorithms-support-b40f386a/" target="_blank">Read More</a>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-slide">
+      <h1>Scramble Project</h1>
+      <p>
+        An interactive site that lets users check how many words they can make from letter combos in Scramble.
+        A fun challenge in implementing game logic and building web functionality.
+      </p>
+      <a href="https://github.com/dorajy8/25_summer_project" target="_blank">Read More</a>
+    </div>
+
+    <!-- Project 5 -->
+    <div class="project-slide">
+      <h1>Interactive Movie Locations</h1>
+      <p>
+        An immersive map interface connecting fictional media to real-world places. Integrated reviews, info, 
+        and multi-media for film buffs, anime fans, and travelers.
+      </p>
+      <a href="https://www.canva.com/design/DAGRd_Tb4OU/rmwBu4vNpocPfsrL7KUScA/edit?utm_content=DAGRd_Tb4OU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank">Read More</a>
+    </div>
+
+    <!-- Sidebar Dots -->
+    <div class="dots"></div>
+  </div>
+
+  <!-- Interests -->
+  <section style="background: var(--peach);">
+    <h1>Interests</h1>
+    <p>I love theatre, dance, and traveling in my free time. 🌍💃🎭</p>
+  </section>
+
+  <!-- Connect -->
+  <section style="background: var(--rosy); color: white;">
+    <h1>Connect</h1>
+    <p>Email: dorali@example.com</p>
+    <p>GitHub: <a href="https://github.com/dorajy8" target="_blank">github.com/dorajy8</a></p>
+    <p>LinkedIn: <a href="#" target="_blank">linkedin.com/in/dora</a></p>
+  </section>
+
+  <script>
+    // Handle project slides + dots
+    const slides = document.querySelectorAll(".project-slide");
+    const dotsContainer = document.querySelector(".dots");
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement("div");
+      dot.classList.add("dot");
+      if (i === 0) dot.classList.add("active");
+      dot.addEventListener("click", () => showSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll(".dot");
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        dots[i].classList.remove("active");
+        if (i === index) {
+          slide.classList.add("active");
+          dots[i].classList.add("active");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
