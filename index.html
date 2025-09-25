@@ -3,21 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dora Li | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <title>Dora Jiayue Li | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ---------- Colors from your palette ---------- */
+    /* ---------- Updated Color Palette with Cream ---------- */
     :root {
       --ice-blue: #CCD4DE;
-      --ice-deep: #456D84;
+      --dark-grey: #4A5568;
       --ice-mid: #899CA3;
       --rosy: #BD9D88;
       --peach: #EBC1A8;
+      --cream: #F5F1E8;
+      --light-pink: #F4D1CD;
     }
 
-    /* Force all text to use Lato */
+    /* Use Inter for body text, Playfair Display for headings */
     * {
-      font-family: "Lato", sans-serif !important;
+      font-family: "Inter", sans-serif !important;
+    }
+
+    /* Creative font for section titles */
+    h1 {
+      font-family: "Playfair Display", serif !important;
     }
 
     body, html {
@@ -41,6 +48,12 @@
       box-sizing: border-box;
     }
 
+    /* Make last two sections shorter */
+    .shorter-section {
+      min-height: 60vh;
+      padding: 1.5rem;
+    }
+
     .content-wrapper {
       max-width: 800px;
       width: 100%;
@@ -48,17 +61,19 @@
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 3.2rem;
       margin: 1rem 0 1.5rem 0;
-      color: var(--ice-deep);
-      font-weight: 700;
+      color: #000000;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-shadow: none;
     }
 
     h2 {
       font-size: 1.8rem;
       margin: 1.5rem 0 1rem 0;
-      color: var(--ice-deep);
-      font-weight: 700;
+      color: #000000;
+      font-weight: 600;
     }
 
     p {
@@ -75,7 +90,7 @@
 
     a {
       color: white;
-      background: var(--ice-deep);
+      background: var(--dark-grey);
       padding: 0.75rem 1.5rem;
       border-radius: 8px;
       text-decoration: none;
@@ -99,7 +114,7 @@
       object-fit: cover;
       margin: 1rem auto 2rem auto;
       display: block;
-      border: 4px solid var(--ice-deep);
+      border: 4px solid var(--dark-grey);
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
@@ -132,7 +147,7 @@
       position: relative;
       height: 100vh;
       width: 100%;
-      overflow: hidden;
+      overflow: hidden; /* This prevents any scrollbars */
     }
 
     .project-slide {
@@ -151,7 +166,7 @@
       opacity: 0;
       transition: all 0.8s ease;
       box-sizing: border-box;
-      overflow-y: auto;
+      overflow: hidden; /* Remove scroll bar completely */
     }
 
     .project-slide.active {
@@ -161,30 +176,37 @@
 
     .project-slide .content-wrapper {
       max-width: 700px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .project-slide h1 {
-      color: var(--ice-deep);
-      margin-bottom: 1.5rem;
-      font-weight: 700;
+      color: #000000;
+      margin-bottom: 1rem;
+      font-weight: 900;
+      font-size: 2.8rem;
+      letter-spacing: -0.02em;
     }
 
     .project-slide p {
       text-align: left;
       color: #444;
-      font-size: 1rem;
-      line-height: 1.7;
-      margin-bottom: 2rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
       font-weight: 400;
     }
 
     /* Project Images */
     .project-image {
       width: 100%;
-      max-width: 500px;
-      height: 250px;
+      max-width: 400px;
+      height: 200px;
       border-radius: 12px;
-      margin: 1rem 0 2rem 0;
+      margin: 1rem 0;
       object-fit: cover;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
@@ -219,27 +241,61 @@
       transform: scale(1.1);
     }
 
-    /* Skills list */
+    /* Skills section */
+    .skills-section {
+      margin: 2rem 0;
+    }
+
+    .skills-category {
+      margin-bottom: 1.2rem;
+    }
+
+    .skills-category h3 {
+      font-size: 1.3rem;
+      color: var(--dark-grey);
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      text-align: left;
+    }
+
     .skills-list {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin: 1rem 0;
+      justify-content: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
     }
 
     .skill-tag {
-      background: var(--ice-deep);
-      color: white;
-      padding: 0.5rem 1rem;
+      color: var(--dark-grey);
+      padding: 0.6rem 1.2rem;
       border-radius: 20px;
       font-size: 0.9rem;
-      font-weight: 400;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(74, 85, 104, 0.2);
+    }
+
+    .skill-tag.programming {
+      background: var(--cream);
+    }
+
+    .skill-tag.data {
+      background: var(--light-pink);
+    }
+
+    .skill-tag.database {
+      background: var(--cream);
+    }
+
+    .skill-tag:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     /* Connect section styling */
     .connect-section h1 {
-      color: white;
+      color: #000000;
     }
 
     .connect-info {
@@ -266,6 +322,11 @@
         padding: 1.5rem 1rem;
       }
 
+      .shorter-section {
+        min-height: 50vh;
+        padding: 1rem;
+      }
+
       .project-slide {
         padding: 1.5rem 1rem;
       }
@@ -274,12 +335,23 @@
         font-size: 2rem;
       }
 
+      .project-slide h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+
       h2 {
         font-size: 1.5rem;
       }
 
       p {
         font-size: 1rem;
+      }
+
+      .project-slide p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-bottom: 0.8rem;
       }
 
       .content-wrapper {
@@ -315,7 +387,8 @@
       }
 
       .project-image {
-        height: 200px;
+        height: 150px;
+        margin: 0.5rem 0;
       }
 
       .interest-gallery {
@@ -337,6 +410,11 @@
         padding: 1rem 0.5rem;
       }
 
+      .shorter-section {
+        min-height: 45vh;
+        padding: 0.8rem 0.5rem;
+      }
+
       .project-slide {
         padding: 1rem 0.5rem;
       }
@@ -345,9 +423,18 @@
         font-size: 1.8rem;
       }
 
+      .project-slide h1 {
+        font-size: 1.6rem;
+      }
+
       .project-image {
-        height: 180px;
-        margin: 0.5rem 0 1.5rem 0;
+        height: 130px;
+        margin: 0.3rem 0;
+      }
+
+      .project-slide p {
+        font-size: 0.85rem;
+        margin-bottom: 0.6rem;
       }
 
       .skills-list {
@@ -366,25 +453,55 @@
   <!-- About -->
   <section style="background: var(--ice-blue);">
     <div class="content-wrapper">
-      <h1>Meet Dora</h1>
-      <img src="./images/profile.png" alt="Dora Li Profile Picture" class="profile-image">
-      <p class="center-text">
-        Hi, I'm Dora Li — a data science professional with a strong foundation in cognitive science and hands-on experience in machine learning, database management, and full-stack development. I'm passionate about transforming complex data into actionable insights and building scalable solutions that drive real-world impact. Ready to apply my technical skills and analytical mindset to tackle industry challenges and contribute to data-driven decision making.
+      <h1>Dora Jiayue</h1>
+      <img src="./images/profile.png" alt="Dora Jiayue Li Profile Picture" class="profile-image">
+      <p style="text-align: left; font-size: 1.15rem; line-height: 1.4; margin: 2rem 0; max-width: 700px; margin-left: auto; margin-right: auto;">
+        Nice to meet you! I am currently a master's student at the University of Chicago interested in applied data science. My previous experience has been dedicated to neural network research and analysis on medicare/medicaid enrollment. I enjoy exploring data from the angle of conducting critical analysis, building more efficient database, and smarter models to transform data into stories of various kinds. Happy to chat with you and please reach out if you have any questions or comments!
       </p>
-      <h2>Education</h2>
-      <p class="center-text">MS Applied Data Science, University of Chicago</p>
-      <p class="center-text">BA Cognitive Science + Data Science Minor, Pitzer College</p>
-      <h2>Skills</h2>
-      <div class="skills-list">
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">PyTorch</span>
-        <span class="skill-tag">SQL</span>
-        <span class="skill-tag">PostgreSQL</span>
-        <span class="skill-tag">Java</span>
-        <span class="skill-tag">R</span>
-        <span class="skill-tag">Relational Database Management</span>
-        <span class="skill-tag">Data Visualization</span>
-        <span class="skill-tag">Machine Learning</span>
+      <h2>Education Journey</h2>
+      <p class="center-text">I was born and raised in Shanghai, attended Claremont Colleges for undergraduate studies in Cognitive Neuroscience! A lot of studying about the brain helps root my interest in Healthcare and Science</p>
+      
+      <h2 style="margin-top: 3rem;">Technical Skills</h2>
+      <div class="skills-section">
+        <div class="skills-category">
+          <h3>Programming Languages</h3>
+          <div class="skills-list">
+            <span class="skill-tag programming">Python</span>
+            <span class="skill-tag data">Java</span>
+            <span class="skill-tag programming">R</span>
+            <span class="skill-tag data">SQL</span>
+          </div>
+        </div>
+        
+        <div class="skills-category">
+          <h3>ML Tools</h3>
+          <div class="skills-list">
+            <span class="skill-tag data">PyTorch</span>
+            <span class="skill-tag programming">TensorFlow</span>
+            <span class="skill-tag data">Pandas</span>
+            <span class="skill-tag programming">Matplotlib</span>
+          </div>
+        </div>
+        
+        <div class="skills-category">
+          <h3>Data Mining Tools</h3>
+          <div class="skills-list">
+            <span class="skill-tag programming">Hadoop</span>
+            <span class="skill-tag data">Spark</span>
+            <span class="skill-tag programming">Airflow</span>
+            <span class="skill-tag data">Kafka</span>
+          </div>
+        </div>
+        
+        <div class="skills-category">
+          <h3>Database & Deployment</h3>
+          <div class="skills-list">
+            <span class="skill-tag data">PostgreSQL</span>
+            <span class="skill-tag programming">Django</span>
+            <span class="skill-tag data">React</span>
+            <span class="skill-tag programming">Linux</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -397,10 +514,10 @@
         <h1>Provider Lookup</h1>
         <img src="./images/provider-lookup.png" alt="Provider Lookup Project Screenshot" class="project-image">
         <p>
-          This is my first full stack project built with the Django framework. I encountered numerous challenges and learned new skills throughout the development process. It was my first exposure to setting up a PostgreSQL database and extracting provider name and location columns from large datasets into the desired format.
+          This is my first full stack project built with the Django framework. I encountered numerous challenges and learned new skills throughout the development process (e.g. setting up a PostgreSQL database, extracting specific columns from large datasets into the desired format).
         </p>
         <p>
-          I built the backend, connected to the database, and implemented API endpoints for provider name and location search. During the process, I had to overcome authentication errors and API failures through extensive testing and debugging. The final search platform display was the most satisfying part, where I made many adjustments from the user perspective to optimize the search function for finding doctors nearby.
+          I built the backend, connected to the database, and implemented API endpoints for provider name and location search. The final search platform display was made many adjustments from the user perspective and my manager Verbus Counts to optimize the search functionality for finding doctors nearby.
         </p>
         <p>
           This full stack experience pushed me to learn outside my comfort zone and developed my user-centric design thinking skills.
@@ -474,10 +591,10 @@
   </div>
 
   <!-- Interests -->
-  <section style="background: var(--peach);">
+  <section style="background: var(--peach);" class="shorter-section">
     <div class="content-wrapper">
       <h1>Interests</h1>
-      <p class="center-text">I love Kpop, watching theatre productions, and traveling in my free time! 🌍💃🎭</p>
+      <p class="center-text">You will find me: learning random dance clips, listening to Kpop, hanging around coffee shops, and visit different mountains in my free time. ☕🏔️💃🎭</p>
       <div class="interest-gallery">
         <img src="./images/dance.png" alt="Kpop Dance" class="interest-image">
         <img src="./images/theatre.png" alt="Theatre Production" class="interest-image">
@@ -487,7 +604,7 @@
   </section>
 
   <!-- Connect -->
-  <section style="background: var(--rosy); color: white;" class="connect-section">
+  <section style="background: var(--rosy); color: white;" class="connect-section shorter-section">
     <div class="content-wrapper">
       <h1>Connect</h1>
       <div class="connect-info">
