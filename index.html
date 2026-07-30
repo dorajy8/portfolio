@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dora Jiayue Li | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="description" content="Dora Jiayue Li — Full Stack Data Scientist, Master of Applied Data Science at the University of Chicago.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ---------- Updated Color Palette with Cream ---------- */
+    /* ---------- Color Palette ---------- */
     :root {
       --ice-blue: #CCD4DE;
       --dark-grey: #4A5568;
@@ -15,16 +16,26 @@
       --peach: #EBC1A8;
       --cream: #F5F1E8;
       --light-pink: #F4D1CD;
+      --ink: #2C333F;
+      --nav-h: 58px;
+      /* Editorial hero palette */
+      --sage: #E9E8DE;
+      --terracotta: #B07E6B;
+      --terracotta-soft: rgba(176, 126, 107, 0.14);
     }
 
-    /* Use Inter for body text, Playfair Display for headings */
     * {
-      font-family: "Inter", sans-serif !important;
+      box-sizing: border-box;
     }
 
-    /* Creative font for section titles */
-    h1 {
-      font-family: "Playfair Display", serif !important;
+    /* Set the base font on body so it INHERITS. A universal `*` rule would
+       re-apply Inter to every descendant and beat serif set on a parent. */
+    body {
+      font-family: "Inter", sans-serif;
+    }
+
+    h1, h2 {
+      font-family: "Playfair Display", serif;
     }
 
     body, html {
@@ -34,99 +45,678 @@
       overflow-x: hidden;
       line-height: 1.6;
       font-weight: 400;
+      color: var(--ink);
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    /* ---------- Sticky Nav ---------- */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: rgba(245, 241, 232, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(74, 85, 104, 0.15);
+    }
+
+    .site-nav a {
+      color: var(--dark-grey);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.45rem 0.9rem;
+      border-radius: 20px;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus-visible {
+      background: var(--dark-grey);
+      color: #fff;
+      outline: none;
     }
 
     section {
-      min-height: 100vh;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      text-align: center;
-      box-sizing: border-box;
-    }
-
-    /* Make last two sections shorter */
-    .shorter-section {
-      min-height: 60vh;
-      padding: 1.5rem;
+      padding: 4.5rem 2rem;
+      scroll-margin-top: var(--nav-h);
     }
 
     .content-wrapper {
-      max-width: 800px;
+      max-width: 820px;
       width: 100%;
       margin: 0 auto;
     }
 
-    h1 {
-      font-size: 3.2rem;
-      margin: 1rem 0 1.5rem 0;
-      color: #000000;
+    .section-title {
+      font-size: 2.8rem;
+      margin: 0 0 1.5rem 0;
+      color: #000;
       font-weight: 900;
       letter-spacing: -0.02em;
-      text-shadow: none;
+      text-align: center;
     }
 
     h2 {
-      font-size: 1.8rem;
-      margin: 1.5rem 0 1rem 0;
-      color: #000000;
-      font-weight: 600;
+      font-size: 1.7rem;
+      margin: 2.5rem 0 0.75rem 0;
+      color: #000;
+      font-weight: 700;
     }
 
     p {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       margin: 1rem 0;
       color: #333;
       text-align: left;
-      font-weight: 400;
     }
 
     .center-text {
       text-align: center;
     }
 
-    a {
-      color: white;
-      background: var(--dark-grey);
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: inline-block;
-      margin: 1rem 0;
-      font-weight: 500;
-    }
-    
-    a:hover {
-      background: var(--rosy);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    /* ---------- Hero: three-column editorial ---------- */
+    .hero {
+      background: var(--sage);
+      min-height: calc(100vh - var(--nav-h));
+      display: flex;
+      align-items: center;
+      padding: 4rem 3rem;
     }
 
-    /* Profile Image Styling */
-    .profile-image {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 1rem auto 2rem auto;
+    .hero-grid {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 3.5rem;
+    }
+
+    /* -- left: stacked name -- */
+    .hero-name {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(3rem, 6vw, 5.6rem);
+      font-weight: 400;
+      line-height: 1.02;
+      color: var(--terracotta);
+      margin: 0;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-name span {
       display: block;
-      border: 4px solid var(--dark-grey);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
-    /* Interest Images Gallery */
+    .hero-role {
+      margin: 3.5rem 0 0 0;
+      font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      text-align: left;
+    }
+
+    /* -- center: portrait -- */
+    .hero-portrait {
+      width: clamp(240px, 26vw, 350px);
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 26px;
+      display: block;
+      box-shadow: 0 18px 50px rgba(120, 96, 84, 0.18);
+    }
+
+    /* -- right: arrow list -- */
+    .hero-facts {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .hero-facts li {
+      display: grid;
+      grid-template-columns: 2.4rem 1fr;
+      align-items: start;
+      font-size: clamp(0.95rem, 1.15vw, 1.12rem);
+      font-weight: 500;
+      line-height: 1.35;
+      color: var(--terracotta);
+    }
+
+    .hero-facts .arrow {
+      font-size: 1.05em;
+      line-height: 1.25;
+    }
+
+    .hero-facts a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.25s ease;
+    }
+
+    .hero-facts a:hover,
+    .hero-facts a:focus-visible {
+      border-bottom-color: var(--terracotta);
+      outline: none;
+    }
+
+    .hero-more {
+      display: grid;
+      grid-template-columns: 2.4rem 1fr;
+      align-items: center;
+      margin-top: 4.5rem;
+      font-size: clamp(0.68rem, 0.85vw, 0.8rem);
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      text-decoration: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .hero-more:hover,
+    .hero-more:focus-visible {
+      opacity: 0.62;
+      outline: none;
+    }
+
+    /* ---------- About ---------- */
+    .about-section {
+      background: var(--cream);
+    }
+
+    .intro-text {
+      text-align: left;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      margin: 0 auto 1rem auto;
+      max-width: 700px;
+    }
+
+    /* ---------- Skills ---------- */
+    .skills-section {
+      margin: 1.5rem auto 0 auto;
+      max-width: 700px;
+      text-align: left;
+    }
+
+    .skills-category {
+      margin-bottom: 1.2rem;
+    }
+
+    .skills-category h3 {
+      font-size: 1.05rem;
+      color: var(--dark-grey);
+      margin-bottom: 0.7rem;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-tag {
+      color: var(--dark-grey);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 1px solid rgba(74, 85, 104, 0.2);
+      background: var(--cream);
+    }
+
+    .skill-tag.data {
+      background: var(--light-pink);
+    }
+
+    .skill-tag:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* ---------- Projects ---------- */
+    .projects-section {
+      background: var(--sage);
+    }
+
+    .projects-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .projects-intro {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 2rem auto;
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      font-family: "Inter", sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #8C817A;
+      background: transparent;
+      border: none;
+      padding: 0.5rem 1.15rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn:focus-visible {
+      color: var(--terracotta);
+      background: var(--terracotta-soft);
+      outline: none;
+    }
+
+    .filter-btn.active {
+      background: var(--terracotta);
+      color: #fff;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: #FDFCF8;
+      /* Uneven corners keep the grid from reading like a dashboard. */
+      border-radius: 34px 34px 34px 8px;
+      padding: 2rem 1.9rem 1.7rem 1.9rem;
+      text-align: left;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 6px 22px rgba(140, 116, 100, 0.09);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .project-card:hover,
+    .project-card:focus-visible {
+      transform: translateY(-6px) rotate(-0.5deg);
+      box-shadow: 0 16px 38px rgba(140, 116, 100, 0.17);
+      outline: none;
+    }
+
+    .project-card:focus-visible {
+      box-shadow: 0 16px 38px rgba(140, 116, 100, 0.17), 0 0 0 2.5px var(--terracotta);
+    }
+
+    .project-card.is-hidden {
+      display: none;
+    }
+
+    /* A small soft dot instead of a hard header band. */
+    .card-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      font-style: italic;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--terracotta);
+      margin-bottom: 0.7rem;
+    }
+
+    .card-category::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      flex-shrink: 0;
+    }
+
+    .project-card[data-category="fullstack"] .card-category { color: #7F8F94; }
+    .project-card[data-category="fullstack"] .card-category::before { background: #7F8F94; }
+    .project-card[data-category="research"] .card-category { color: #C08A5E; }
+    .project-card[data-category="research"] .card-category::before { background: #C08A5E; }
+
+    .project-card h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 0 0.65rem 0;
+      color: #33302C;
+      line-height: 1.25;
+    }
+
+    .card-blurb {
+      font-size: 0.93rem;
+      color: #555;
+      margin: 0 0 1rem 0;
+      line-height: 1.55;
+      flex-grow: 1;
+    }
+
+    .card-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-tech span {
+      font-size: 0.73rem;
+      font-weight: 500;
+      color: #6E655E;
+      background: rgba(176, 126, 107, 0.09);
+      border: none;
+      padding: 0.28rem 0.7rem;
+      border-radius: 100px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-top: 1rem;
+      border-top: none;
+    }
+
+    .card-assets {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .asset-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #8C817A;
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    .asset-chip svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    .card-cue {
+      font-size: 0.82rem;
+      font-weight: 500;
+      font-style: italic;
+      color: var(--terracotta);
+      white-space: nowrap;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .card-cue {
+      transform: translateX(4px);
+    }
+
+    /* ---------- Modal ---------- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(44, 51, 63, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+
+    /* An explicit display value beats the [hidden] UA default, so restate it. */
+    .modal-backdrop[hidden] {
+      display: none;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      position: relative;
+      background: #FDFCF8;
+      border-radius: 34px 34px 34px 10px;
+      max-width: 720px;
+      width: 100%;
+      padding: 2.5rem;
+      margin: auto;
+      transform: translateY(16px) scale(0.985);
+      transition: transform 0.28s ease;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+    }
+
+    .modal-backdrop.open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: var(--cream);
+      color: var(--dark-grey);
+      font-size: 1.2rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .modal-close:hover,
+    .modal-close:focus-visible {
+      background: var(--rosy);
+      color: #fff;
+      outline: none;
+    }
+
+    .modal .detail-category {
+      font-size: 0.85rem;
+      font-weight: 500;
+      font-style: italic;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--terracotta);
+      margin-bottom: 0.5rem;
+    }
+
+    .modal h2 {
+      font-size: 1.9rem;
+      margin: 0 0 0.35rem 0;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      padding-right: 2rem;
+    }
+
+    .modal .detail-sub {
+      font-size: 0.98rem;
+      color: var(--ice-mid);
+      font-style: italic;
+      margin: 0 0 1.25rem 0;
+    }
+
+    .modal .detail-meta {
+      font-size: 0.85rem;
+      color: #6E655E;
+      background: var(--terracotta-soft);
+      border-radius: 16px;
+      padding: 0.8rem 1.1rem;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .modal .detail-image {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 22px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 24px rgba(140, 116, 100, 0.15);
+    }
+
+    .modal h4 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--terracotta);
+      margin: 1.9rem 0 0.5rem 0;
+    }
+
+    .modal p {
+      font-size: 0.98rem;
+      line-height: 1.65;
+      margin: 0.6rem 0;
+    }
+
+    .modal ul {
+      margin: 0.6rem 0;
+      padding-left: 1.25rem;
+    }
+
+    .modal li {
+      font-size: 0.96rem;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal .detail-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 1rem 0 0 0;
+    }
+
+    .modal .detail-tech span {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #6E655E;
+      background: rgba(176, 126, 107, 0.1);
+      border: none;
+      padding: 0.32rem 0.8rem;
+      border-radius: 100px;
+    }
+
+    .detail-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(74, 85, 104, 0.12);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #fff;
+      background: var(--terracotta);
+      padding: 0.75rem 1.5rem;
+      border-radius: 100px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .btn svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: #9C6C5A;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(140, 116, 100, 0.25);
+      outline: none;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--terracotta);
+      border: 1.5px solid var(--terracotta);
+    }
+
+    .btn.secondary:hover,
+    .btn.secondary:focus-visible {
+      background: var(--terracotta);
+      color: #fff;
+      border-color: var(--terracotta);
+    }
+
+    .detail-note {
+      font-size: 0.78rem;
+      color: var(--ice-mid);
+      margin-top: 0.85rem;
+      width: 100%;
+    }
+
+    .project-detail {
+      display: none;
+    }
+
+    /* ---------- Interests ---------- */
+    .interests-section {
+      background: var(--peach);
+    }
+
     .interest-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
-      margin: 2rem 0;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 2rem auto 0 auto;
+      max-width: 620px;
     }
 
     .interest-image {
@@ -142,513 +732,801 @@
       transform: scale(1.05);
     }
 
-    /* ---------- Project Slides ---------- */
-    .projects-container {
-      position: relative;
-      height: 100vh;
-      width: 100%;
-      overflow: hidden; /* This prevents any scrollbars */
-    }
-
-    .project-slide {
-      position: absolute;
-      top: 0;
-      left: 100%;
-      height: 100%;
-      width: 100%;
-      padding: 2rem;
-      background: var(--ice-blue);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      opacity: 0;
-      transition: all 0.8s ease;
-      box-sizing: border-box;
-      overflow: hidden; /* Remove scroll bar completely */
-    }
-
-    .project-slide.active {
-      left: 0;
-      opacity: 1;
-    }
-
-    .project-slide .content-wrapper {
-      max-width: 700px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .project-slide h1 {
-      color: #000000;
-      margin-bottom: 1rem;
-      font-weight: 900;
-      font-size: 2.8rem;
-      letter-spacing: -0.02em;
-    }
-
-    .project-slide p {
-      text-align: left;
-      color: #444;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-      font-weight: 400;
-    }
-
-    /* Project Images */
-    .project-image {
-      width: 100%;
-      max-width: 400px;
-      height: 200px;
-      border-radius: 12px;
-      margin: 1rem 0;
-      object-fit: cover;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    /* Sidebar Dots */
-    .dots {
-      position: absolute;
-      top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 100;
-    }
-    
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--ice-mid);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .dot.active {
+    /* ---------- Connect ---------- */
+    .connect-section {
       background: var(--rosy);
-      transform: scale(1.2);
+      color: #fff;
+      text-align: center;
     }
 
-    .dot:hover {
-      transform: scale(1.1);
+    .connect-section .section-title {
+      color: #fff;
     }
 
-    /* Skills section */
-    .skills-section {
-      margin: 2rem 0;
-    }
-
-    .skills-category {
-      margin-bottom: 1.2rem;
-    }
-
-    .skills-category h3 {
-      font-size: 1.3rem;
-      color: var(--dark-grey);
-      margin-bottom: 0.8rem;
-      font-weight: 600;
-      text-align: left;
-    }
-
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .skill-tag {
-      color: var(--dark-grey);
-      padding: 0.6rem 1.2rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(74, 85, 104, 0.2);
-    }
-
-    .skill-tag.programming {
-      background: var(--cream);
-    }
-
-    .skill-tag.data {
-      background: var(--light-pink);
-    }
-
-    .skill-tag.database {
-      background: var(--cream);
-    }
-
-    .skill-tag:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    /* Connect section styling */
-    .connect-section h1 {
-      color: #000000;
-    }
-
-    .connect-info {
-      margin: 1rem 0;
-      font-size: 1.1rem;
-      font-weight: 400;
+    .connect-info p {
+      color: #fff;
+      text-align: center;
+      font-size: 1.05rem;
+      margin: 0.75rem 0;
     }
 
     .connect-info a {
-      background: rgba(255,255,255,0.2);
-      color: white;
-      border: 2px solid white;
-      font-weight: 500;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+      padding-bottom: 1px;
+      transition: border-color 0.25s ease;
     }
 
     .connect-info a:hover {
-      background: white;
-      color: var(--rosy);
+      border-bottom-color: #fff;
     }
 
-    /* ---------- Mobile Responsive ---------- */
+    /* ---------- Tablet: three columns get too cramped, so stack ---------- */
+    @media (max-width: 1024px) {
+      .hero {
+        padding: 3.5rem 2rem;
+        min-height: 0;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 2.5rem;
+      }
+
+      .hero-name,
+      .hero-role {
+        text-align: center;
+      }
+
+      .hero-role {
+        margin-top: 1.5rem;
+      }
+
+      .hero-facts {
+        max-width: 26rem;
+      }
+
+      .hero-more {
+        margin-top: 2.5rem;
+      }
+    }
+
+    /* ---------- Mobile ---------- */
     @media (max-width: 768px) {
       section {
-        padding: 1.5rem 1rem;
+        padding: 3rem 1.25rem;
       }
 
-      .shorter-section {
-        min-height: 50vh;
-        padding: 1rem;
+      .site-nav {
+        gap: 0.15rem;
       }
 
-      .project-slide {
-        padding: 1.5rem 1rem;
+      .site-nav a {
+        font-size: 0.82rem;
+        padding: 0.4rem 0.6rem;
       }
 
-      h1 {
+      .hero {
+        padding: 3rem 1.5rem;
+        min-height: 0;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 2.25rem;
+      }
+
+      .hero-name {
+        font-size: 3.1rem;
+        text-align: center;
+      }
+
+      .hero-role {
+        margin-top: 1.25rem;
+        text-align: center;
+      }
+
+      .hero-portrait {
+        width: min(76vw, 290px);
+      }
+
+      .hero-facts {
+        gap: 1.1rem;
+        text-align: left;
+      }
+
+      .hero-more {
+        margin-top: 2.25rem;
+      }
+
+      .section-title {
         font-size: 2rem;
       }
 
-      .project-slide h1 {
-        font-size: 1.8rem;
-        margin-bottom: 0.5rem;
+      h2 {
+        font-size: 1.4rem;
       }
 
-      h2 {
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal {
+        padding: 2rem 1.25rem;
+        border-radius: 12px;
+      }
+
+      .modal h2 {
         font-size: 1.5rem;
       }
 
-      p {
-        font-size: 1rem;
+      .modal-backdrop {
+        padding: 1rem 0.75rem;
       }
 
-      .project-slide p {
-        font-size: 0.9rem;
-        line-height: 1.4;
-        margin-bottom: 0.8rem;
-      }
-
-      .content-wrapper {
-        max-width: 100%;
-      }
-
-      .project-slide .content-wrapper {
-        max-width: 100%;
-      }
-
-      .skills-list {
-        gap: 0.5rem;
-      }
-
-      .skill-tag {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
-      }
-
-      .dots {
-        right: 10px;
-        gap: 8px;
-      }
-
-      .dot {
-        width: 10px;
-        height: 10px;
-      }
-
-      .profile-image {
-        width: 150px;
-        height: 150px;
-      }
-
-      .project-image {
-        height: 150px;
-        margin: 0.5rem 0;
+      .detail-links .btn {
+        flex: 1 1 100%;
+        justify-content: center;
       }
 
       .interest-gallery {
         grid-template-columns: 1fr;
-        gap: 0.5rem;
-      }
-
-      .interest-image {
-        height: 120px;
-      }
-
-      a {
-        padding: 0.6rem 1.2rem;
       }
     }
 
-    @media (max-width: 480px) {
-      section {
-        padding: 1rem 0.5rem;
-      }
-
-      .shorter-section {
-        min-height: 45vh;
-        padding: 0.8rem 0.5rem;
-      }
-
-      .project-slide {
-        padding: 1rem 0.5rem;
-      }
-
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .project-slide h1 {
-        font-size: 1.6rem;
-      }
-
-      .project-image {
-        height: 130px;
-        margin: 0.3rem 0;
-      }
-
-      .project-slide p {
-        font-size: 0.85rem;
-        margin-bottom: 0.6rem;
-      }
-
-      .skills-list {
-        gap: 0.3rem;
-      }
-
-      .skill-tag {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.6rem;
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- About -->
-  <section style="background: var(--ice-blue);">
+  <nav class="site-nav">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#interests">Interests</a>
+    <a href="#connect">Connect</a>
+  </nav>
+
+  <!-- ============ Hero ============ -->
+  <section class="hero" id="home">
+    <div class="hero-grid">
+      <div>
+        <h1 class="hero-name"><span>Dora</span><span>Jiayue</span><span>Li</span></h1>
+        <p class="hero-role">Full Stack Data Scientist</p>
+      </div>
+
+      <img src="./images/profile.jpg" alt="Dora Jiayue Li" class="hero-portrait">
+
+      <div>
+        <ul class="hero-facts">
+          <li><span class="arrow" aria-hidden="true">&rarr;</span><span>Currently Seeking Full-time roles in Data Science / Healthcare AI</span></li>
+          <li><span class="arrow" aria-hidden="true">&rarr;</span><span>Data Science Intern at KYC2020</span></li>
+          <li><span class="arrow" aria-hidden="true">&rarr;</span><span>Graduate student from UChicago, Class of 2026</span></li>
+          <li><span class="arrow" aria-hidden="true">&rarr;</span><span><a href="mailto:jiayue1@uchicago.edu">jiayue1@uchicago.edu</a></span></li>
+        </ul>
+        <a class="hero-more" href="#about"><span class="arrow" aria-hidden="true">&rarr;</span><span>See more of my personal experiences</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ About ============ -->
+  <section class="about-section" id="about">
     <div class="content-wrapper">
-      <h1>Dora Jiayue</h1>
-      <img src="./images/profile.png" alt="Dora Jiayue Li Profile Picture" class="profile-image">
-      <p style="text-align: left; font-size: 1.15rem; line-height: 1.4; margin: 2rem 0; max-width: 700px; margin-left: auto; margin-right: auto;">
+      <h1 class="section-title">About Me</h1>
+      <p class="intro-text">
         Nice to meet you! I am currently a master student at the University of Chicago major in applied data science. My previous experience has been dedicated to neural network research and analysis on medicare/medicaid enrollment. I enjoy conducting critical analysis, building more efficient database, and exploring best-fit models to transform data into stories of various kinds. Happy to chat with you and please reach out to learn more about me!
       </p>
+
       <h2>Education Journey</h2>
+      <p class="center-text">Currently attending Uchicago Master of Applied Data Science</p>
       <p class="center-text">I was born and raised in Shanghai, attended Claremont Colleges for undergraduate studies in Cognitive Neuroscience! A lot of studying of the brain helps root my interest in Healthcare and Science</p>
-      
-      <h2 style="margin-top: 3rem;">Technical Skills</h2>
+
+      <h2>Technical Skills</h2>
       <div class="skills-section">
         <div class="skills-category">
           <h3>Programming Languages</h3>
           <div class="skills-list">
-            <span class="skill-tag programming">Python</span>
+            <span class="skill-tag">Python</span>
             <span class="skill-tag data">Java</span>
-            <span class="skill-tag programming">R</span>
+            <span class="skill-tag">R</span>
             <span class="skill-tag data">SQL</span>
           </div>
         </div>
-        
+
         <div class="skills-category">
-          <h3>ML Tools</h3>
+          <h3>ML &amp; AI Tools</h3>
           <div class="skills-list">
             <span class="skill-tag data">PyTorch</span>
-            <span class="skill-tag programming">TensorFlow</span>
-            <span class="skill-tag data">Pandas</span>
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag data">scikit-learn</span>
+            <span class="skill-tag">Pandas</span>
+            <span class="skill-tag data">ChromaDB</span>
+            <span class="skill-tag">SentenceTransformers</span>
           </div>
         </div>
-        
+
         <div class="skills-category">
           <h3>Data Mining Tools</h3>
           <div class="skills-list">
-            <span class="skill-tag programming">Hadoop</span>
+            <span class="skill-tag">Hadoop</span>
             <span class="skill-tag data">Spark</span>
-            <span class="skill-tag programming">Airflow</span>
+            <span class="skill-tag">Airflow</span>
             <span class="skill-tag data">Kafka</span>
           </div>
         </div>
-        
+
         <div class="skills-category">
-          <h3>Database & Deployment</h3>
+          <h3>Database &amp; Deployment</h3>
           <div class="skills-list">
             <span class="skill-tag data">PostgreSQL</span>
-            <span class="skill-tag programming">Django</span>
+            <span class="skill-tag">Django</span>
             <span class="skill-tag data">React</span>
-            <span class="skill-tag programming">Linux</span>
+            <span class="skill-tag">Streamlit</span>
+            <span class="skill-tag data">Linux</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects -->
-  <div class="projects-container" id="projects">
-    <!-- Project 1 -->
-    <div class="project-slide active">
-      <div class="content-wrapper">
-        <h1>Provider Lookup</h1>
-        <img src="./images/provider-lookup.png" alt="Provider Lookup Project Screenshot" class="project-image">
-        <p>
-          This is my first full stack project built with the Django framework. I encountered numerous challenges and learned new skills throughout the development process (e.g. setting up a PostgreSQL database, extracting specific columns from large datasets into the desired format).
-        </p>
-        <p>
-          I built the backend, connected to the database, and implemented API endpoints for provider name and location search. The final search platform display was repeatedly modified from the user perspective and with my manager Verbus Counts' help to optimize search functionality for finding doctors nearby.
-        </p>
-        <p>
-          This full stack experience pushed me to learn outside my comfort zone and developed my user-centric design thinking skills.
-        </p>
-        <a href="https://github.com/dorajy8/Provider_lookup" target="_blank">Read More</a>
+  <!-- ============ Projects ============ -->
+  <section class="projects-section" id="projects">
+    <div class="projects-wrapper">
+      <h1 class="section-title">Projects</h1>
+      <p class="projects-intro">Click any card for the full write-up, code, and slides.</p>
+
+      <div class="filters" role="group" aria-label="Filter projects by category">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ai">AI &amp; Machine Learning</button>
+        <button class="filter-btn" data-filter="fullstack">Full Stack &amp; Product</button>
+        <button class="filter-btn" data-filter="research">Research</button>
       </div>
-    </div>
 
-    <!-- Project 2 -->
-    <div class="project-slide">
-      <div class="content-wrapper">
-        <h1>Yaaro</h1>
-        <img src="./images/yaaro.png" alt="Yaaro Mobile App Screenshot" class="project-image">
-        <p>
-          Yaaro is an application for building friendships and gathering young people in groups for concerts and sports events. I feel extremely lucky to be part of a team working on a project that pushed me to learn new skills, especially building recommendation engines from scratch and using Supabase Edge functions to host the engine and integrate with the mobile application backend.
-        </p>
-        <p>
-          I spent considerable time researching how to design recommendation systems composed of user profiles, hobbies, and activities. Trustin and I implemented sentiment analysis using Deno edge functions to process texts and return sentiment scores. This startup is now launching in the app store.
-        </p>
-        <a href="https://www.yaaro.co/" target="_blank">Read More</a>
-      </div>
-    </div>
+      <div class="project-grid" id="projectGrid">
 
-    <!-- Project 3 -->
-    <div class="project-slide">
-      <div class="content-wrapper">
-        <h1>Recurrent Spiking Neural Network Research</h1>
-        <img src="./images/RSNN.png" alt="RSNN Research Project Visualization" class="project-image">
-        <p>
-          Under the lead of Prof. Yuqing Zhu, I worked with four other students during summer 2024 to research RSNN in terms of its potential to complete tasks and its functional similarities with how our brain carries out information processing.
-        </p>
-        <p>
-          We found that compared to backpropagation, using evolutionary algorithms to train RSNN pushes the recurrent layer of the network to perform brain-like behavior, which represents the desired brain activities that neuroscientists want to observe. Antara and I presented our results at the Society of Neuroscience conference in Chicago 2024.
-        </p>
-        <a href="https://www.world-wide.org/bernstein-24/evolutionary-algorithms-support-b40f386a/" target="_blank">Read More</a>
-      </div>
-    </div>
+        <!-- RAG -->
+        <article class="project-card" data-category="ai" data-detail="detail-rag" tabindex="0" role="button" aria-label="Open details for RAG Chatbot for UChicago MSADS">
+          <div class="card-category">AI &amp; Machine Learning</div>
+          <h3>RAG Chatbot for UChicago MSADS</h3>
+          <p class="card-blurb">A grounded retrieval chatbot that answers prospective-student questions from 14 MSADS pages, cites its source, and refuses anything it cannot support.</p>
+          <div class="card-tech"><span>Python</span><span>ChromaDB</span><span>Streamlit</span><span>GPT-4o</span></div>
+          <div class="card-footer">
+            <div class="card-assets">
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.34c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.18-.89-1.18-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .66-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.54-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>Code</span>
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h12v9H2V2Zm1 1v7h10V3H3Zm4.5 9h1v2h3v1h-7v-1h3v-2Z"/></svg>Slides</span>
+            </div>
+            <span class="card-cue">View &rarr;</span>
+          </div>
+        </article>
 
-    <!-- Project 4 -->
-    <div class="project-slide">
-      <div class="content-wrapper">
-        <h1>Scramble Project</h1>
-        <img src="./images/scramble.png" alt="Scramble Word Game Website" class="project-image">
-        <p>
-          Do you ever wonder how many points you can score with a letter combination in SCRAMBLE? I built this interactive website that allows you to check how many SCRAMBLE words are in your letter combinations.
-        </p>
-        <p>
-          This project was particularly fun in terms of implementing scramble rules and building the complete website functionality. It combines game logic with web development to create an engaging user experience.
-        </p>
-        <a href="https://github.com/dorajy8/25_summer_project" target="_blank">Read More</a>
-      </div>
-    </div>
+        <!-- Clothing Fit -->
+        <article class="project-card" data-category="ai" data-detail="detail-fit" tabindex="0" role="button" aria-label="Open details for Predicting Clothing Fit">
+          <div class="card-category">AI &amp; Machine Learning</div>
+          <h3>Predicting Clothing Fit</h3>
+          <p class="card-blurb">A three-phase pipeline over 390k+ retail transactions that segments body types, classifies fit outcomes, and recommends the size most likely to actually fit.</p>
+          <div class="card-tech"><span>scikit-learn</span><span>LDA</span><span>Clustering</span><span>Collaborative Filtering</span></div>
+          <div class="card-footer">
+            <div class="card-assets">
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.34c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.18-.89-1.18-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .66-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.54-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>Code</span>
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h12v9H2V2Zm1 1v7h10V3H3Zm4.5 9h1v2h3v1h-7v-1h3v-2Z"/></svg>Slides</span>
+            </div>
+            <span class="card-cue">View &rarr;</span>
+          </div>
+        </article>
 
-    <!-- Project 5 -->
-    <div class="project-slide">
-      <div class="content-wrapper">
-        <h1>Interactive Movie Locations</h1>
-        <img src="./images/movie-locations.png" alt="Interactive Movie Locations Map Interface" class="project-image">
-        <p>
-          My project aims to bridge the gap between fantasy and reality by creating an immersive, interactive map interface that brings fictional worlds to life in real locations.
-        </p>
-        <p>
-          By integrating various information on different media types - reviews, info text - into a seamless, intuitive interface, we create a multi-layered experience that caters to film buffs, anime enthusiasts, history lovers, and curious travelers alike. This project combines geographic data with entertainment media to create unique discovery experiences.
-        </p>
-        <a href="https://www.canva.com/design/DAGRd_Tb4OU/rmwBu4vNpocPfsrL7KUScA/edit?utm_content=DAGRd_Tb4OU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank">Read More</a>
-      </div>
-    </div>
+        <!-- Amazon Reviews -->
+        <article class="project-card" data-category="ai" data-detail="detail-amazon" tabindex="0" role="button" aria-label="Open details for Amazon Review Similarity Analysis">
+          <div class="card-category">AI &amp; Machine Learning</div>
+          <h3>Amazon Review Similarity Analysis</h3>
+          <p class="card-blurb">Scalable LSH similarity analysis across 285 months of Amazon reviews, asking whether AI-written text still shows up as detectable duplication. It does not &mdash; and that is the finding.</p>
+          <div class="card-tech"><span>Spark</span><span>LSH / MinHash</span><span>Cloud Computing</span><span>EDA</span></div>
+          <div class="card-footer">
+            <div class="card-assets">
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.34c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.18-.89-1.18-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .66-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.54-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>Code</span>
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h12v9H2V2Zm1 1v7h10V3H3Zm4.5 9h1v2h3v1h-7v-1h3v-2Z"/></svg>Slides</span>
+            </div>
+            <span class="card-cue">View &rarr;</span>
+          </div>
+        </article>
 
-    <!-- Sidebar Dots -->
-    <div class="dots"></div>
-  </div>
+        <!-- Yelp -->
+        <article class="project-card" data-category="ai" data-detail="detail-yelp" tabindex="0" role="button" aria-label="Open details for Yelp Restaurant Recommendation System">
+          <div class="card-category">AI &amp; Machine Learning</div>
+          <h3>Yelp Restaurant Recommendation System</h3>
+          <p class="card-blurb">Personalized restaurant ranking on the Yelp Open Dataset, built as a ladder of architectures from item-item collaborative filtering up to a LightGCN graph model.</p>
+          <div class="card-tech"><span>PyTorch</span><span>LightGCN</span><span>Collaborative Filtering</span><span>NDCG</span></div>
+          <div class="card-footer">
+            <div class="card-assets">
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h12v9H2V2Zm1 1v7h10V3H3Zm4.5 9h1v2h3v1h-7v-1h3v-2Z"/></svg>Slides</span>
+            </div>
+            <span class="card-cue">View &rarr;</span>
+          </div>
+        </article>
 
-  <!-- Interests -->
-  <section style="background: var(--peach);" class="shorter-section">
-    <div class="content-wrapper">
-      <h1>Interests</h1>
-      <p class="center-text">You will find me: learning random dance clips, listening to Kpop, hanging around coffee shops, and visit different beaches in my free time. </p>
-      <div class="interest-gallery">
-        <img src="./images/dance.png" alt="Kpop Dance" class="interest-image">
-        <img src="./images/theatre.png" alt="Theatre Production" class="interest-image">
-        <img src="./images/travel.png" alt="Travel Adventure" class="interest-image">
+        <!-- Chicago 311 -->
+        <article class="project-card" data-category="ai" data-detail="detail-311" tabindex="0" role="button" aria-label="Open details for Forecasting Chicago 311 Service Demand">
+          <div class="card-category">AI &amp; Machine Learning</div>
+          <h3>Forecasting Chicago 311 Service Demand</h3>
+          <p class="card-blurb">Six time-series models benchmarked against each other to give city departments a next-day and six-month outlook on service request volume.</p>
+          <div class="card-tech"><span>Prophet</span><span>SARIMAX</span><span>Holt-Winters</span><span>statsmodels</span></div>
+          <div class="card-footer">
+            <div class="card-assets">
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h12v9H2V2Zm1 1v7h10V3H3Zm4.5 9h1v2h3v1h-7v-1h3v-2Z"/></svg>Slides</span>
+            </div>
+            <span class="card-cue">View &rarr;</span>
+          </div>
+        </article>
+
+        <!-- Provider Lookup -->
+        <article class="project-card" data-category="fullstack" data-detail="detail-provider" tabindex="0" role="button" aria-label="Open details for Provider Lookup">
+          <div class="card-category">Full Stack &amp; Product</div>
+          <h3>Provider Lookup</h3>
+          <p class="card-blurb">My first full stack build: a Django and PostgreSQL search platform for finding doctors nearby, designed and re-designed from the user's perspective.</p>
+          <div class="card-tech"><span>Django</span><span>PostgreSQL</span><span>REST API</span><span>Python</span></div>
+          <div class="card-footer">
+            <div class="card-assets">
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.34c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.18-.89-1.18-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .66-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.54-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>Code</span>
+            </div>
+            <span class="card-cue">View &rarr;</span>
+          </div>
+        </article>
+
+        <!-- Yaaro -->
+        <article class="project-card" data-category="fullstack" data-detail="detail-yaaro" tabindex="0" role="button" aria-label="Open details for Yaaro">
+          <div class="card-category">Full Stack &amp; Product</div>
+          <h3>Yaaro</h3>
+          <p class="card-blurb">A friendship-building app for concerts and sports events, where I built a recommendation engine from scratch and hosted it on Supabase Edge functions. Now launching in the App Store.</p>
+          <div class="card-tech"><span>Supabase</span><span>Deno</span><span>Recommender Systems</span><span>Sentiment Analysis</span></div>
+          <div class="card-footer">
+            <div class="card-assets">
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1ZM2.5 8c0-.6.1-1.2.3-1.7l3.3 3.3v1.2c0 .5.4.9.9.9v1.6A5.5 5.5 0 0 1 2.5 8Zm8.8 4.4c-.1-.4-.5-.7-.9-.7h-.5v-1.4c0-.3-.2-.5-.5-.5H6.5v-1h1c.3 0 .5-.2.5-.5V6.5h1c.5 0 .9-.4.9-.9v-.3a5.5 5.5 0 0 1 1.4 7.1Z"/></svg>Live Site</span>
+            </div>
+            <span class="card-cue">View &rarr;</span>
+          </div>
+        </article>
+
+        <!-- Movie Locations -->
+        <article class="project-card" data-category="fullstack" data-detail="detail-movie" tabindex="0" role="button" aria-label="Open details for Interactive Movie Locations">
+          <div class="card-category">Full Stack &amp; Product</div>
+          <h3>Interactive Movie Locations</h3>
+          <p class="card-blurb">An immersive map interface that bridges fantasy and reality, layering reviews and context onto the real places where fiction was filmed.</p>
+          <div class="card-tech"><span>Geospatial Data</span><span>UX Design</span><span>Interactive Maps</span></div>
+          <div class="card-footer">
+            <div class="card-assets">
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h12v9H2V2Zm1 1v7h10V3H3Zm4.5 9h1v2h3v1h-7v-1h3v-2Z"/></svg>Deck</span>
+            </div>
+            <span class="card-cue">View &rarr;</span>
+          </div>
+        </article>
+
+        <!-- RSNN -->
+        <article class="project-card" data-category="research" data-detail="detail-rsnn" tabindex="0" role="button" aria-label="Open details for Recurrent Spiking Neural Network Research">
+          <div class="card-category">Research</div>
+          <h3>Recurrent Spiking Neural Network Research</h3>
+          <p class="card-blurb">Summer 2024 research showing that evolutionary algorithms push an RSNN's recurrent layer toward genuinely brain-like behavior where backpropagation does not. Presented at SfN Chicago 2024.</p>
+          <div class="card-tech"><span>Spiking Neural Networks</span><span>Evolutionary Algorithms</span><span>Computational Neuroscience</span></div>
+          <div class="card-footer">
+            <div class="card-assets">
+              <span class="asset-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h12v9H2V2Zm1 1v7h10V3H3Zm4.5 9h1v2h3v1h-7v-1h3v-2Z"/></svg>Abstract</span>
+            </div>
+            <span class="card-cue">View &rarr;</span>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <!-- Connect -->
-  <section style="background: var(--rosy); color: white;" class="connect-section shorter-section">
+  <!-- ============ Project Detail Content (hidden, cloned into modal) ============ -->
+  <div id="projectDetails" aria-hidden="true">
+
+    <div class="project-detail" id="detail-rag">
+      <div class="detail-category">AI &amp; Machine Learning</div>
+      <h2>RAG Chatbot for UChicago MSADS</h2>
+      <p class="detail-sub">Generative AI Principles &middot; UChicago MSADS team project</p>
+      <p class="detail-meta"><strong>My role:</strong> Frontend &amp; demo &mdash; Streamlit UI, chat interaction testing and debugging, and the live-demo flow.</p>
+
+      <h4>The Problem</h4>
+      <p>Applicants normally navigate 14 separate MSADS pages to answer simple questions about admissions, tuition, curriculum, and capstone requirements. We built a grounded RAG chatbot that retrieves the correct passage, cites its source, and declines to answer anything the corpus does not support.</p>
+
+      <h4>Pipeline</h4>
+      <ul>
+        <li>Scraped 14 MSADS sub-pages with <em>requests</em> and BeautifulSoup.</li>
+        <li>Chunked into 1,500-character sliding windows with 100-character overlap.</li>
+        <li>Embedded with <em>all-mpnet-base-v2</em>, producing 768-dimensional vectors.</li>
+        <li>Retrieved via ChromaDB cosine search, top-k = 4 (adjustable), returning text, title, and URL.</li>
+        <li>Assembled a context of at most 3,000 characters, then generated with GPT-4o / Llama 3.2 at temperature 0.2 and a 900-token cap.</li>
+      </ul>
+
+      <h4>Guardrails</h4>
+      <ul>
+        <li><strong>Grounding:</strong> every answer must tie to retrieved evidence, and the model may not invent program details.</li>
+        <li><strong>Failure policy:</strong> if retrieval fails, the bot answers &ldquo;I don't know&rdquo; rather than guessing.</li>
+        <li><strong>Scope filter:</strong> off-topic queries get a polite redirect before any API call is made.</li>
+        <li><strong>PII redaction:</strong> a regex pass strips every email address and phone number from LLM output before display.</li>
+      </ul>
+
+      <h4>Challenges We Hit</h4>
+      <ul>
+        <li>The chatbot too often replied &ldquo;I don't have enough information.&rdquo; We wrote a custom cleaner, re-chunked by topic, and expanded the corpus from 9 to 14 pages.</li>
+        <li>Two questions in one prompt broke retrieval, because the retriever embedded the whole multi-question prompt as a single vector. Fixed with multi-query retrieval and query decomposition.</li>
+        <li>Retrieval recall alone did not catch hallucinations or bad refusals, so we evaluated <em>behavior</em> using a harness-agent evaluator instead of recall metrics.</li>
+      </ul>
+
+      <div class="detail-tech"><span>Python</span><span>Streamlit</span><span>ChromaDB</span><span>SentenceTransformers</span><span>GPT-4o</span><span>Llama 3.2</span><span>BeautifulSoup</span></div>
+
+      <div class="detail-links">
+        <a class="btn" href="https://github.com/dorajy8/RAG_interactiveAI_MSADS" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.34c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.18-.89-1.18-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .66-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.54-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>
+          GitHub Repo
+        </a>
+        <a class="btn secondary" href="./slides/rag-msads-genai.pptx" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v8.6l3-3 .7.7L7.5 11.8 3.3 7.3 4 6.6l3 3V1h1ZM2 13h12v1H2v-1Z"/></svg>
+          Download Slides
+        </a>
+        <p class="detail-note">PowerPoint file, 2.6 MB.</p>
+      </div>
+    </div>
+
+    <div class="project-detail" id="detail-fit">
+      <div class="detail-category">AI &amp; Machine Learning</div>
+      <h2>Predicting Clothing Fit</h2>
+      <p class="detail-sub">A Machine Learning Approach to Size Recommendation &middot; March 2026</p>
+      <p class="detail-meta"><strong>Team:</strong> Harleen Kaur Buttar, Dora Jiayue Li, Skylar Liu &mdash; Machine Learning 1</p>
+
+      <h4>The Problem</h4>
+      <p>Size recommendation and fit prediction improve online shopping and cut returns. This project builds a pipeline that identifies body-type segments, predicts fit outcomes, and recommends the optimal size for a given customer&ndash;product pair.</p>
+
+      <h4>Data</h4>
+      <ul>
+        <li><strong>Rent The Runway</strong> &mdash; 192,544 rental transactions with fit feedback, body measurements, review text, ratings, and occasion context. Our primary modeling dataset.</li>
+        <li><strong>ModCloth</strong> &mdash; 82,790 purchase transactions with partial measurements, used to test cross-retailer generalization.</li>
+        <li><strong>Clothes-Size-Prediction</strong> &mdash; 119,218 records of clean height, weight, and age mapped to XXS&ndash;XXXL, used as a benchmarking baseline.</li>
+      </ul>
+      <p>Cleaning standardized height, weight, and bust into numeric features and computed BMI, converted everything to inches and pounds, filtered unrealistic ages and measurements, one-hot encoded the categorical feedback fields, and dropped columns more than 80% null.</p>
+
+      <h4>Phase 1 &mdash; Unsupervised Segmentation</h4>
+      <p>K-means, K-modes, DBSCAN, and GMM clustering to find the dimensions along which fit fails: who the customers are and what they are renting. LDA topic modeling translated unstructured review language into structured probability distributions that became features for the next phase.</p>
+
+      <h4>Phase 2 &mdash; Fit Classification</h4>
+      <p>Fit outcome as a three-class problem (Small / Fit / Large) with imbalanced labels. Seven classifiers were trained and compared on accuracy and macro-F1, run against both a simple feature set (weight, age, height) and the engineered RTR features, so we could measure exactly how much richer features bought us.</p>
+
+      <h4>Phase 3 &mdash; Size Recommender</h4>
+      <p>Collaborative filtering over historical fit data: a sparse user &times; category-size matrix where each entry holds the probability that a size fits that user, with cosine similarity to find users with similar fit patterns. A category-level size popularity prior stabilizes predictions when interaction data is sparse and handles cold-start users with no history.</p>
+
+      <h4>Limitations</h4>
+      <ul>
+        <li>Fit labels are self-reported and reflect subjective perception, not objective measurement.</li>
+        <li>Sizing is inconsistent between manufacturers, and garment dimensions are missing.</li>
+        <li>No temporal dimension, so the model cannot account for fit perception shifting over seasons.</li>
+        <li>The recommender underperformed on RTR because it was trained on normalized categories rather than item IDs.</li>
+      </ul>
+
+      <div class="detail-tech"><span>Python</span><span>scikit-learn</span><span>K-means</span><span>GMM</span><span>DBSCAN</span><span>LDA</span><span>Collaborative Filtering</span></div>
+
+      <div class="detail-links">
+        <a class="btn" href="https://github.com/dorajy8/Machine-Learning-Final-Project" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.34c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.18-.89-1.18-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .66-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.54-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>
+          GitHub Repo
+        </a>
+        <a class="btn secondary" href="./slides/clothing-fit-size-recommendation.pptx" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v8.6l3-3 .7.7L7.5 11.8 3.3 7.3 4 6.6l3 3V1h1ZM2 13h12v1H2v-1Z"/></svg>
+          Download Slides
+        </a>
+        <p class="detail-note">PowerPoint file, 5.6 MB.</p>
+      </div>
+    </div>
+
+    <div class="project-detail" id="detail-amazon">
+      <div class="detail-category">AI &amp; Machine Learning</div>
+      <h2>Amazon Review Similarity Analysis</h2>
+      <p class="detail-sub">Big Data and Cloud Computing &middot; solo project</p>
+
+      <h4>The Question</h4>
+      <p>As AI gets better at writing coherently like a human, it becomes easier to generate a batch of fake reviews to promote a product. This project analyzes two Amazon datasets spanning 2000 to 2023 &mdash; 285 months in total &mdash; to investigate whether AI contributes to redundant product reviews, and whether that redundancy can still be caught with scalable similarity-based analysis.</p>
+
+      <h4>Data Preparation</h4>
+      <p>Joined two datasets, removed records missing categories, ratings, product titles, timestamps, or join keys, dropped columns with large numbers of nulls, and kept only the columns essential to analyzing purchases, reviews, ratings, and prices. Deduplication on timestamp and user ID found roughly 1% duplicate records.</p>
+
+      <h4>What the Timeline Showed</h4>
+      <ul>
+        <li>Very few reviews between 2000 and 2012, then a steady climb as online shopping took hold.</li>
+        <li>Volume peaked in December 2019 and January 2020 as COVID pushed lifestyles onto delivery, with a second spike in March and April 2021 overlapping lockdown.</li>
+        <li>As price rose, review count fell but average rating rose &mdash; expensive products draw fewer buyers but more consistently positive feedback.</li>
+        <li>The most-reviewed products clustered in phone accessories and beauty items, and active reviewers who post often still rate generously, mostly on products under $25.</li>
+      </ul>
+
+      <h4>The Similarity Finding</h4>
+      <p>Across 8,058 titles, 45.45% of reviews had a similar title, while only 7.40% had similar body text &mdash; titles are short and repetitive, so they collide far more often than prose does.</p>
+      <p>The counterintuitive result came from comparing 5,103 recent reviews (2022&ndash;2023) against 5,061 older ones (pre-2022): the <em>recent</em> reviews duplicated <em>less</em>. LSH detects lexical duplication, not semantic similarity. AI-generated reviews are lexically unique even when they say the same thing, so the duplication rate drops precisely where you would expect it to rise. That is a limitation of the method, not evidence of authenticity.</p>
+
+      <div class="detail-tech"><span>PySpark</span><span>LSH / MinHash</span><span>Cloud Computing</span><span>Time Series EDA</span></div>
+
+      <div class="detail-links">
+        <a class="btn" href="https://github.com/dorajy8/Amazon_reviews_similarity_analysis" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.34c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.18-.89-1.18-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .66-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.54-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>
+          GitHub Repo
+        </a>
+        <a class="btn secondary" href="./slides/amazon-reviews-similarity.pptx" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v8.6l3-3 .7.7L7.5 11.8 3.3 7.3 4 6.6l3 3V1h1ZM2 13h12v1H2v-1Z"/></svg>
+          Download Slides
+        </a>
+        <p class="detail-note">PowerPoint file, 2.0 MB.</p>
+      </div>
+    </div>
+
+    <div class="project-detail" id="detail-yelp">
+      <div class="detail-category">AI &amp; Machine Learning</div>
+      <h2>Yelp Restaurant Recommendation System</h2>
+      <p class="detail-sub">Machine Learning 2 &middot; team project</p>
+      <p class="detail-meta"><strong>Team:</strong> Charlotte Zhang, Dora Li, Emily Xue, Mia Mac</p>
+
+      <h4>The Problem</h4>
+      <p>Restaurant discovery is a high-frequency decision: people choose where to eat several times a week, yet most platforms surface options by proximity or average rating, leaving individual taste patterns largely unexploited. That creates a persistent gap between what platforms recommend and what a given user would actually enjoy. Using the Yelp Open Dataset &mdash; reviews, ratings, profile features, cuisine type, price range, ambience, and amenities &mdash; our objective was to close it with a personalized ranked list.</p>
+
+      <h4>Approach</h4>
+      <p>We built a ladder of architectures where each step addressed the previous model's bottleneck: item-item and user-user collaborative filtering established the baseline, content features broke through the sparsity ceiling, and LightGCN's graph propagation added multi-hop signal.</p>
+
+      <h4>Results</h4>
+      <ul>
+        <li><strong>+38% NDCG@10</strong> going from item-item CF to LightGCN (0.026 &rarr; 0.036).</li>
+        <li>Richer representation did improve ranking, confirming our first hypothesis. Graph structure beat features: LightGCN's 3-hop propagation carried signal that content features alone could not.</li>
+        <li>Our second hypothesis &mdash; that user activity predicts CF quality &mdash; was only partially confirmed. It held for item-item CF and LightGCN, but user-user CF was non-monotonic, with NDCG@10 actually dipping for users with 6&ndash;20 reviews compared to those with 1&ndash;5.</li>
+      </ul>
+
+      <h4>Future Work</h4>
+      <ul>
+        <li>A content-based cold-start fallback on categories, location, and price range to cover new users until collaborative signal accumulates.</li>
+        <li>Pre-computed embeddings indexed with FAISS for sub-millisecond retrieval, making LightGCN viable at production scale.</li>
+        <li>Re-evaluation on 2023&ndash;2024 data: our test set's 47% cold-start removal rate was driven by pandemic closures, so a later window would give a cleaner baseline.</li>
+      </ul>
+
+      <div class="detail-tech"><span>Python</span><span>PyTorch</span><span>LightGCN</span><span>Collaborative Filtering</span><span>NDCG Evaluation</span></div>
+
+      <div class="detail-links">
+        <a class="btn" href="./slides/yelp-recommendation-system.pptx" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v8.6l3-3 .7.7L7.5 11.8 3.3 7.3 4 6.6l3 3V1h1ZM2 13h12v1H2v-1Z"/></svg>
+          Download Slides
+        </a>
+        <p class="detail-note">PowerPoint file, 5.7 MB. No public repo for this project.</p>
+      </div>
+    </div>
+
+    <div class="project-detail" id="detail-311">
+      <div class="detail-category">AI &amp; Machine Learning</div>
+      <h2>Forecasting Chicago 311 Service Demand</h2>
+      <p class="detail-sub">Time Series Analysis &middot; team project</p>
+      <p class="detail-meta"><strong>Team:</strong> Elaine Wang, Dora Jiayue Li, Yuwei Tang, Tallulah Cook, Xiaoyan Chen</p>
+
+      <h4>The Problem</h4>
+      <p>Chicago's 311 system routes hundreds of thousands of service requests monthly across city departments. Without reliable demand forecasts, agencies cannot efficiently allocate staffing or resources, which leads to delayed response times, resident dissatisfaction, and budget inefficiency. Success meant a model recommendation balancing forecast accuracy against interpretability &mdash; one the city could realistically adopt for day-to-day planning.</p>
+
+      <h4>Data</h4>
+      <ul>
+        <li>Daily 311 request volume, 2020&ndash;2026, viewed both citywide and by the top five departments: 311 City Services, Alderman, CDOT, Streets &amp; Sanitation, and DWM.</li>
+        <li>Monthly weather from NOAA NCEI Climate at a Glance &mdash; average temperature and temperature anomaly.</li>
+      </ul>
+      <p>Processing parsed and sorted dates onto a continuous index, reindexed to daily counts with count-safe handling of missing days, built monthly aggregates for robustness and to align with weather frequency, then joined the two. EDA showed strong weekly seasonality, which justified a 7-day seasonal period for the daily models.</p>
+
+      <h4>Models Compared</h4>
+      <p>A seasonal-naive baseline (forecast tomorrow using last week's same weekday), SARIMA for trend and seasonal structure, SARIMAX adding weather as external regressors, Prophet for trend and holiday effects, Holt-Winters exponential smoothing, and VAR for multivariate structure &mdash; all scored on MAE and RMSE.</p>
+
+      <h4>Findings</h4>
+      <ul>
+        <li>The best model varies by aggregation level and time granularity. For daily operational forecasting, Prophet was best for total 311 volume, while Holt-Winters and Prophet led at the department level.</li>
+        <li>Translated to operations, the forecast pre-stages resources ahead of predicted surges, shifts staffing by department before peak days, and triggers cross-department coordination when several departments spike at once.</li>
+      </ul>
+
+      <h4>Limitations</h4>
+      <ul>
+        <li>Feature sets were inconsistent across models &mdash; some used weather regressors, others did not.</li>
+        <li>A single train/test split with insufficient cross-validation.</li>
+        <li>Mixed daily and monthly granularity limits direct MAE/RMSE comparison between models.</li>
+      </ul>
+
+      <div class="detail-tech"><span>Python</span><span>Prophet</span><span>SARIMA / SARIMAX</span><span>Holt-Winters</span><span>VAR</span><span>statsmodels</span></div>
+
+      <div class="detail-links">
+        <a class="btn" href="./slides/chicago-311-forecasting.pptx" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v8.6l3-3 .7.7L7.5 11.8 3.3 7.3 4 6.6l3 3V1h1ZM2 13h12v1H2v-1Z"/></svg>
+          Download Slides
+        </a>
+        <p class="detail-note">PowerPoint file, 3.8 MB. No public repo for this project.</p>
+      </div>
+    </div>
+
+    <div class="project-detail" id="detail-provider">
+      <div class="detail-category">Full Stack &amp; Product</div>
+      <h2>Provider Lookup</h2>
+      <img src="./images/provider-lookup.png" alt="Provider Lookup search interface" class="detail-image" loading="lazy">
+      <p>This is my first full stack project built with the Django framework. I encountered numerous challenges and learned new skills throughout the development process, such as setting up a PostgreSQL database and extracting specific columns from large datasets into the desired format.</p>
+      <p>I built the backend, connected to the database, and implemented API endpoints for provider name and location search. The final search platform display was repeatedly modified from the user perspective and with my manager Verbus Counts' help, to optimize search functionality for finding doctors nearby.</p>
+      <p>This full stack experience pushed me to learn outside my comfort zone and developed my user-centric design thinking skills.</p>
+
+      <div class="detail-tech"><span>Django</span><span>PostgreSQL</span><span>Python</span><span>REST API</span></div>
+
+      <div class="detail-links">
+        <a class="btn" href="https://github.com/dorajy8/Provider_lookup" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.34c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.18-.89-1.18-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .66-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.54-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>
+          GitHub Repo
+        </a>
+      </div>
+    </div>
+
+    <div class="project-detail" id="detail-yaaro">
+      <div class="detail-category">Full Stack &amp; Product</div>
+      <h2>Yaaro</h2>
+      <img src="./images/yaaro.png" alt="Yaaro mobile app screens" class="detail-image" loading="lazy">
+      <p>Yaaro is an application for building friendships and gathering young people in groups for concerts and sports events. I feel extremely lucky to be part of a team working on a project that pushed me to learn new skills, especially building recommendation engines from scratch and using Supabase Edge functions to host the engine and integrate with the mobile application backend.</p>
+      <p>I spent considerable time researching how to design recommendation systems composed of user profiles, hobbies, and activities. Trustin and I implemented sentiment analysis using Deno edge functions to process texts and return sentiment scores. This startup is now launching in the app store.</p>
+
+      <div class="detail-tech"><span>Supabase</span><span>Deno Edge Functions</span><span>Recommender Systems</span><span>Sentiment Analysis</span></div>
+
+      <div class="detail-links">
+        <a class="btn" href="https://www.yaaro.co/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M9 2h5v5h-1V3.7L7.9 8.8l-.7-.7L12.3 3H9V2ZM3 4h4v1H4v7h7V9h1v4H3V4Z"/></svg>
+          Visit yaaro.co
+        </a>
+      </div>
+    </div>
+
+    <div class="project-detail" id="detail-movie">
+      <div class="detail-category">Full Stack &amp; Product</div>
+      <h2>Interactive Movie Locations</h2>
+      <img src="./images/movie-locations.png" alt="Interactive movie locations map interface" class="detail-image" loading="lazy">
+      <p>My project aims to bridge the gap between fantasy and reality by creating an immersive, interactive map interface that brings fictional worlds to life in real locations.</p>
+      <p>By integrating various information on different media types &mdash; reviews, info text &mdash; into a seamless, intuitive interface, we create a multi-layered experience that caters to film buffs, anime enthusiasts, history lovers, and curious travelers alike. This project combines geographic data with entertainment media to create unique discovery experiences.</p>
+
+      <div class="detail-tech"><span>Geospatial Data</span><span>UX Design</span><span>Interactive Maps</span></div>
+
+      <div class="detail-links">
+        <a class="btn" href="https://www.canva.com/design/DAGRd_Tb4OU/rmwBu4vNpocPfsrL7KUScA/edit?utm_content=DAGRd_Tb4OU&amp;utm_campaign=designshare&amp;utm_medium=link2&amp;utm_source=sharebutton" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M9 2h5v5h-1V3.7L7.9 8.8l-.7-.7L12.3 3H9V2ZM3 4h4v1H4v7h7V9h1v4H3V4Z"/></svg>
+          View Deck
+        </a>
+      </div>
+    </div>
+
+    <div class="project-detail" id="detail-rsnn">
+      <div class="detail-category">Research</div>
+      <h2>Recurrent Spiking Neural Network Research</h2>
+      <img src="./images/RSNN.png" alt="RSNN research visualization" class="detail-image" loading="lazy">
+      <p>Under the lead of Prof. Yuqing Zhu, I worked with four other students during summer 2024 to research RSNN in terms of its potential to complete tasks and its functional similarities with how our brain carries out information processing.</p>
+      <p>We found that compared to backpropagation, using evolutionary algorithms to train RSNN pushes the recurrent layer of the network to perform brain-like behavior, which represents the desired brain activities that neuroscientists want to observe. Antara and I presented our results at the Society of Neuroscience conference in Chicago 2024.</p>
+
+      <div class="detail-tech"><span>Spiking Neural Networks</span><span>Evolutionary Algorithms</span><span>Computational Neuroscience</span></div>
+
+      <div class="detail-links">
+        <a class="btn" href="https://www.world-wide.org/bernstein-24/evolutionary-algorithms-support-b40f386a/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M9 2h5v5h-1V3.7L7.9 8.8l-.7-.7L12.3 3H9V2ZM3 4h4v1H4v7h7V9h1v4H3V4Z"/></svg>
+          Read Abstract
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ Modal ============ -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose" aria-label="Close project details">&#10005;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ============ Interests ============ -->
+  <section class="interests-section" id="interests">
     <div class="content-wrapper">
-      <h1>Connect</h1>
+      <h1 class="section-title">Interests</h1>
+      <p class="center-text">You will find me: learning random dance clips, listening to Kpop, hanging around coffee shops, and visiting different beaches in my free time.</p>
+      <div class="interest-gallery">
+        <img src="./images/dance.png" alt="Kpop dance" class="interest-image" loading="lazy">
+        <img src="./images/theatre.png" alt="Theatre production" class="interest-image" loading="lazy">
+        <img src="./images/travel.png" alt="Travel" class="interest-image" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Connect ============ -->
+  <section class="connect-section" id="connect">
+    <div class="content-wrapper">
+      <h1 class="section-title">Connect</h1>
       <div class="connect-info">
         <p>Email: jiayue1@uchicago.edu</p>
-        <p>GitHub: <a href="https://github.com/dorajy8" target="_blank">github.com/dorajy8</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/jiayue-li-dora/" target="_blank">linkedin.com/in/jiayue-li-dora</a></p>
+        <p>GitHub: <a href="https://github.com/dorajy8" target="_blank" rel="noopener">github.com/dorajy8</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/jiayue-li-dora/" target="_blank" rel="noopener">linkedin.com/in/jiayue-li-dora</a></p>
       </div>
     </div>
   </section>
 
   <script>
-    // Handle project slides + dots
-    const slides = document.querySelectorAll(".project-slide");
-    const dotsContainer = document.querySelector(".dots");
+    (function () {
+      // ---------- Category filtering ----------
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      const cards = Array.from(document.querySelectorAll(".project-card"));
 
-    slides.forEach((_, i) => {
-      const dot = document.createElement("div");
-      dot.classList.add("dot");
-      if (i === 0) dot.classList.add("active");
-      dot.addEventListener("click", () => showSlide(i));
-      dotsContainer.appendChild(dot);
-    });
-
-    const dots = document.querySelectorAll(".dot");
-
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.remove("active");
-        dots[i].classList.remove("active");
-        if (i === index) {
-          slide.classList.add("active");
-          dots[i].classList.add("active");
-        }
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          filterBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          const filter = btn.dataset.filter;
+          cards.forEach(card => {
+            const show = filter === "all" || card.dataset.category === filter;
+            card.classList.toggle("is-hidden", !show);
+          });
+        });
       });
-    }
 
-    // Auto-advance slides (optional)
-    let currentSlide = 0;
-    const autoAdvance = () => {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
-    };
+      // ---------- Modal ----------
+      const backdrop = document.getElementById("modalBackdrop");
+      const modalBody = document.getElementById("modalBody");
+      const closeBtn = document.getElementById("modalClose");
+      let lastFocused = null;
 
-    // Uncomment to enable auto-advance every 10 seconds
-    // setInterval(autoAdvance, 10000);
+      function openModal(card) {
+        const detail = document.getElementById(card.dataset.detail);
+        if (!detail) return;
+
+        lastFocused = card;
+        modalBody.innerHTML = detail.innerHTML;
+
+        // Point the dialog's accessible name at the cloned <h2>.
+        const heading = modalBody.querySelector("h2");
+        if (heading) {
+          heading.id = "modalTitle";
+        }
+
+        backdrop.hidden = false;
+        document.body.classList.add("modal-open");
+        // Let the browser paint the un-hidden node before transitioning opacity.
+        requestAnimationFrame(() => backdrop.classList.add("open"));
+        closeBtn.focus();
+      }
+
+      function closeModal() {
+        backdrop.classList.remove("open");
+        document.body.classList.remove("modal-open");
+        const finish = () => {
+          backdrop.hidden = true;
+          modalBody.innerHTML = "";
+        };
+        // Match the 0.28s CSS transition, but do not strand the modal open
+        // if transitions are disabled by prefers-reduced-motion.
+        setTimeout(finish, 280);
+        if (lastFocused) {
+          lastFocused.focus();
+          lastFocused = null;
+        }
+      }
+
+      cards.forEach(card => {
+        card.addEventListener("click", () => openModal(card));
+        card.addEventListener("keydown", e => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openModal(card);
+          }
+        });
+      });
+
+      closeBtn.addEventListener("click", closeModal);
+
+      backdrop.addEventListener("click", e => {
+        if (e.target === backdrop) closeModal();
+      });
+
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && !backdrop.hidden) closeModal();
+      });
+    })();
   </script>
 </body>
 </html>
